@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+ 
+{% block content %}
+  
+  <div class="page-header">
+    <h1>Welcome to Twitter.js, Nimit!</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
+      <b>The Nimit</b><br>
+      1,000,000,000,000 followers
+    </div>
+    <div class="col-md-9 tweetbox">
+      <h2>Add a Tweet</h2>
+      {% if showForm %}
+        <form action="/submit" method="POST">
+          <label for="name_field">Name:</label>
+          <input name="name" type="text" id="name_field" value="{{tweets[0].User.name}}"/>
+          <br>
+          <label for="text_field">Text:</label>
+          <input name="text" type="text" id="text_field" style="width: 350px;" />
+          <br>
+          <input type="submit" value="Submit" />
+        </form>
+      {% endif %}
+
+      <h2>All Tweets</h2>
+    
+      <!-- display tweets here -->
+      {% for tweet in tweets %}
+      <div class="tweet">
+        <img>
+        <div class="tweet-info">
+          <p><b>{{tweet.User.name}}</b></p>
+          <p>{{tweet.tweet}}</p>
+          <p><a href="/users/{{tweet.User.name}}">Retweet @ {{tweet.User.name}}</a></p>
+          <p><a href="/users/{{tweet.User.name}}/tweets/{{tweet.id}}">View tweet</a></p>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+    
+{% endblock %}
