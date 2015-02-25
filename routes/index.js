@@ -7,7 +7,7 @@ module.exports = function (io) {
 
   router.get('/', function (req, res) {
 
-    Tweet.findAll({ 
+    Tweet.findAll({ order: 'id DESC',
       include: [ User ] }).then(function(tweets) {
         res.render( 'index', { title: 'Twitter.js', tweets: tweets, showForm: true } );        
     });
